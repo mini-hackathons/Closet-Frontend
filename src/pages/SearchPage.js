@@ -1,6 +1,18 @@
 import React from 'react';
+import Test from '../components/Test';
+import SearchResult from '../components/SearchResult';
 
-const searchResults = [
+export default class SearchPage extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+
+        };
+    }
+
+    
+searchResults = [
     {
         img: 'https://protaxny.com/images/galleries/style/jquery/full-page/examples/imgs/bg3.jpg',
         owner: 'Guy',
@@ -21,20 +33,23 @@ const searchResults = [
     }
 ];
 
-export default class SearchPage extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-
-        };
-    }
-
     render() {
         return (
             <div>
                 <h1>Search Results</h1>
+                
+                <Test></Test>
 
+            {
+                this.searchResults.map(result => (
+                    <SearchResult
+                        img={result.img}
+                        owner={result.owner}
+                        name={result.name}
+                        description={result.description}>
+                    </SearchResult>
+                ))
+            }
 
             </div>
         )
