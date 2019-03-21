@@ -27,9 +27,17 @@ export default class LoginForm extends React.Component {
         e.stopPropagation();
 
         try {
-            const response = await axios.post('http://localhost:3000/login.', {
-                username: this.state.username,
-                password: this.state.password
+            const response = await axios({
+                method: 'POST',
+                url: 'http://localhost:3000/login',
+                data: {
+                    username: this.state.username,
+                    password: this.state.password
+                },
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                withCredentials: true
             });
             
             console.log(response);
