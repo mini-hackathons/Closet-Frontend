@@ -1,12 +1,12 @@
 import React from 'react';
 
-import  LoginForm from '../components/LoginForm';
+import CredentialForm from '../components/CredentialForm';
 
 const LoginPage = (props) => (
   <div>
     <h1>Login</h1>
 
-    <LoginForm/>
+    <CredentialForm postUrl='http://localhost:3000/login'/>
   </div>
 )
 

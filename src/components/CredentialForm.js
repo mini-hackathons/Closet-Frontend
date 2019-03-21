@@ -3,7 +3,11 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 
 import axios from 'axios';
 
-export default class LoginForm extends React.Component {
+/**
+ * Props
+ *  postUrl- Url to send credentials to
+ */
+export default class CredentialForm extends React.Component {
     constructor(props){
         super(props);
 
@@ -29,7 +33,7 @@ export default class LoginForm extends React.Component {
         try {
             const response = await axios({
                 method: 'POST',
-                url: 'http://localhost:3000/login',
+                url: this.props.postUrl,
                 data: {
                     username: this.state.username,
                     password: this.state.password
