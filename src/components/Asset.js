@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 
 const onClick = (e) => {
     // Maybe do something
@@ -8,7 +8,11 @@ const onClick = (e) => {
 const Asset = (props) => (
     <div>
         <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={props.imageUrl} />
+                <Card.Img
+                    style={{ height: '195px', objectFit: 'cover' }}
+                    variant="top"
+                    src={props.imageUrl}
+                />
                 <Card.Body>
                     <Card.Title>{props.name}</Card.Title>
                     <Card.Text>{props.description}</Card.Text>

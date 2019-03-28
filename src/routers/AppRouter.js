@@ -4,7 +4,10 @@ import createHistory from 'history/createBrowserHistory'
 
 import Header from '../components/Header';
 import SearchPage from '../pages/SearchPage';
+
 import LoginPage from '../pages/LoginPage';
+import VerifyPage from '../pages/VerifyPage';
+
 import ProfilePage from '../pages/ProfilePage';
 import NotFoundPage from '../pages/NotFoundPage';
 
@@ -19,7 +22,7 @@ const AppRouter = (props) => {
               <Route path="/" component={SearchPage} exact={true}/>
 
               <Route path="/login" component={LoginPage} exact={true}/>
-              <Route path="/verify" component={LoginPage} exact={false}/>
+              <Route path="/verify" component={VerifyPage} exact={false}/>
               <Route path="/reset" component={LoginPage} exact={false}/>
 
               <Route path="/profile" component={ProfilePage} exact={true}/>

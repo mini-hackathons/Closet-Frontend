@@ -38,14 +38,14 @@ export default class CredentialForm extends React.Component {
                     username: this.state.username,
                     password: this.state.password
                 },
-                headers: {
-                  'Content-Type': 'application/json'
-                },
                 withCredentials: true
             });
             
             console.log(response);
+
+            this.props.onSubmit();
         }catch(err) {
+            console.log("Error");
             console.log(err);
         }
 

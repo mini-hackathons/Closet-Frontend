@@ -1,5 +1,8 @@
 import React from 'react';
 import Asset from '../components/Asset';
+import AssetForm from '../components/AssetForm';
+import FadeIn from '../components/FadeIn';
+import { history } from '../routers/AppRouter';
 
 import axios from 'axios';
 
@@ -16,42 +19,65 @@ class ProfilePage extends React.Component {
     }
 
     async componentDidMount() {
-        const res = await axios.get('http://localhost:3000/profile', { withCredentials: true });
-        const { email, username, inventory } = res.data.data;
-        await this.setState({ email, username, inventory });
+        try{
+            const res = await axios.get(
+                'http://localhost:3000/profile',
+                { withCredentials: true });
 
-        console.log(inventory)
-        console.log(this.state.inventory)
+            console.log(res);
+            
+            const { email, username, inventory } = res.data.data;
+            await this.setState({ email, username, inventory });
+    
+            // console.log(inventory);
+            // console.log(this.state.inventory);
+    
+            this.setState({ loaded: true });
+        }catch(err) {
+            console.log('Error')
+            console.log(err)
 
-        this.setState({ loaded: true })
+            history.push('/login');
+        }
     }
 
     render() {
-        const jsx = !this.state.loaded ? 
+        const profile = !this.state.loaded ? 
             (
                 <div>
-                    <h1>Waiting</h1>
+                    <h1>Loading</h1>
                 </div>
             ) :
             (
                 <div>
-                    <h1>Profile</h1>
                     <h2>{this.state.username ? this.state.username : this.state.email}</h2>
 
+                    <FadeIn className='row' cols={3} maxRows={3}>
                     {
-                        this.state.inventory.map(asset =>
-                            <Asset
-                                name={asset.name}
-                                description={asset.description}
-                                imageUrl={asset.imageUrl}
-                                price={asset.price}
-                            />
-                        )
+                        this.state.inventory.map(asset => {
+                            return (
+                                <Asset
+                                    key={asset._id}
+                                    name={asset.name}
+                                    description={asset.description}
+                                    imageUrl={asset.imageUrl}
+                                    price={asset.price}
+                                />
+                            )
+                        })
                     }
+                    </FadeIn>
                 </div>
             )
 
-        return jsx;
+        return (
+            <div>
+                <h1>Profile</h1>
+                <AssetForm></AssetForm>
+
+                { profile }
+            </div>
+        );
     }
 }
 
